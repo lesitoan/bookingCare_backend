@@ -47,6 +47,68 @@ const readAllUser = () => {
     })
 }
 
+const getUserData = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await db.User.findOne({ where: { id: userId }, raw: true });
+            if (user) {
+                resolve(user);
+            } else {
+                resolve('khong tim thay user !!!');
+            }
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+const updateUserData = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await db.User.findOne({ where: { id: data.id }, raw: true });
+            if (user) {
+                await db.User.update({
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    address: data.address,
+                },
+                    {
+                        where: {
+                            id: data.id
+                        }
+                    });
+                const users = await db.User.findAll({ raw: true });
+                resolve(users);
+            } else {
+                resolve();
+            }
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+const deleteUser = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await db.User.findOne({ where: { id: userId }, raw: true });
+            if (user) {
+                await db.User.destroy({
+                    where: {
+                        id: userId
+                    }
+                });
+                const users = await db.User.findAll({ raw: true });
+                resolve(users);
+            } else {
+                resolve('khong tim thay user !!!');
+            }
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 module.exports = {
-    createNewUser, readAllUser
+    createNewUser, readAllUser, getUserData, updateUserData, deleteUser
 }

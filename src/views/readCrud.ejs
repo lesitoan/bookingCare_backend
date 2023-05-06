@@ -20,6 +20,7 @@
                     <th scope="col">Last name</th>
                     <th scope="col">Address</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,10 @@
                         </td>
                         <td>
                             <%= data[i].email %>
+                        </td>
+                        <td>
+                            <a href="/update-crud?id=<%= data[i].id %>"><button type="button">Update</button></a>
+                            <a href="/delete-crud?id=<%= data[i].id %>"><button type="button">Delete</button></a>
                         </td>
                     </tr>
                     <% } %>

@@ -23,10 +23,31 @@ const createCRUD = async (req, res) => {
 
 const readCRUD = async (req, res) => {
     const data = await crudService.readAllUser();
-    console.log(data);
     return res.render('readCrud.ejs', { data: data })
 }
 
+const getUpdateCRUD = async (req, res) => {
+    const userId = req.query.id;
+    if (userId) {
+        const userData = await crudService.getUserData(userId);
+        return res.render('updateCrud.ejs', { data: userData });
+    } else {
+        return res.send('user not found');
+    }
+}
+
+const postUpdateCRUD = async (req, res) => {
+    const data = req.body;
+    const users = await crudService.updateUserData(data)
+    return res.render('readCrud.ejs', { data: users })
+}
+
+const deleteCRUD = async (req, res) => {
+    const userId = req.query.id;
+    const users = await crudService.deleteUser(userId);
+    return res.render('readCrud.ejs', { data: users });
+}
+
 module.exports = {
-    getHomePage, getCRUD, createCRUD, readCRUD
+    getHomePage, getCRUD, createCRUD, readCRUD, getUpdateCRUD, postUpdateCRUD, deleteCRUD
 }
