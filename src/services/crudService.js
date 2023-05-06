@@ -36,6 +36,17 @@ const createNewUser = async (data) => {
     })
 }
 
+const readAllUser = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const users = await db.User.findAll({ raw: true });
+            resolve(users);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 module.exports = {
-    createNewUser, hashUserPassword
+    createNewUser, readAllUser
 }
