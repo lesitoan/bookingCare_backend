@@ -1,7 +1,7 @@
 
 const express = require('express');
-import userController from "../controllers/apiController/userController";
-import doctorController from "../controllers/apiController/doctorController";
+import userController from "../controllers/userController";
+import doctorController from "../controllers/doctorController";
 
 const router = express.Router();
 

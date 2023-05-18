@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import db from "../../models/index";
+import db from "../models/index";
 
 const checkUserEmail = (email) => {
     return new Promise(async (resolve, reject) => {

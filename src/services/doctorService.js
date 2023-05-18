@@ -1,4 +1,4 @@
-import db from "../../models/index";
+import db from "../models/index";
 
 const getTopDoctor = (limit) => {
     return new Promise(async (resolve, reject) => {
@@ -7,10 +7,10 @@ const getTopDoctor = (limit) => {
                 limit: limit,
                 // order: [['createAt', 'DESC']],
                 raw: true,
-                include: [
-                    { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
-                    { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
-                ],
+                // include: [
+                //     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+                //     { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
+                // ],
                 attributes: { exclude: ['password'] }
             });
             resolve(doctors);

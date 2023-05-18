@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import multer from "multer";
 import viewEngine from "./config/viewEngine";
-import initWebRoutes from "./route/index";
+import initWebRoutes from "./routes/index";
 import connectDB from "./config/connectDB";
 
 const app = express();

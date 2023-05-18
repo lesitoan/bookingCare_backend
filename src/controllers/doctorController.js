@@ -1,4 +1,4 @@
-import doctorService from "../../services/apiService/doctorService";
+import doctorService from "../services/doctorService";
 
 //-----Get top doctor home------
 const getTopDoctor = async (req, res) => {
@@ -10,6 +10,7 @@ const getTopDoctor = async (req, res) => {
         const doctors = await doctorService.getTopDoctor(limit);
         return res.status(200).json(doctors);
     } catch (e) {
+        console.log(e)
         return res.status(200).json({
             message: 'loi !!!!'
         })

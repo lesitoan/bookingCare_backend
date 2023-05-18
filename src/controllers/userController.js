@@ -1,5 +1,5 @@
 
-import userService from "../../services/apiService/userService";
+import userService from "../services/userService";
 
 //-----check user login-----
 const handleLoginUser = async (req, res) => {
