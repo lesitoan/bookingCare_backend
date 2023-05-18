@@ -17,6 +17,35 @@ const getTopDoctor = async (req, res) => {
     }
 }
 
+//-----Get all doctors------
+const getAllDoctors = async (req, res) => {
+    try {
+        const doctors = await doctorService.getAllDoctors();
+        return res.status(200).json(doctors);
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            message: 'loi !!!!'
+        })
+    }
+}
+
+//-----Post info doctor------
+const postInfoDoctor = async (req, res) => {
+    try {
+        const data = req.body;
+        const updatedInfo = await doctorService.createInfoDoctor(data);
+        return res.status(200).json(updatedInfo);
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            message: 'loi !!!!'
+        })
+    }
+}
+
 module.exports = {
     getTopDoctor,
+    getAllDoctors,
+    postInfoDoctor,
 }

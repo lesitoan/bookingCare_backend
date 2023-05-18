@@ -16,5 +16,7 @@ router.delete("/delete-user/:id", userController.handleDeleteUser);
 //-----Other----
 router.get('/allcode/:type', userController.handleAllCode);
 router.get('/top-doctor', doctorController.getTopDoctor);
+router.get('/doctors', doctorController.getAllDoctors);
+router.post('/info-doctor', doctorController.postInfoDoctor);
 
 module.exports = router;
