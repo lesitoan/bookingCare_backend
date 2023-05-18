@@ -144,5 +144,10 @@ const getAllCode = (typeInput) => {
 }
 
 module.exports = {
-    checkUserLogin, getUser, updateUser, createUser, deleteUser, getAllCode
+    checkUserLogin,
+    getUser,
+    updateUser,
+    createUser,
+    deleteUser,
+    getAllCode,
 }

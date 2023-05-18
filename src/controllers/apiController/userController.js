@@ -60,6 +60,10 @@ const handleAllCode = async (req, res) => {
 
 
 module.exports = {
-    handleLoginUser, handleGetUser, handleUpdateUser, handleCreateUser, handleDeleteUser,
-    handleAllCode
+    handleLoginUser,
+    handleGetUser,
+    handleUpdateUser,
+    handleCreateUser,
+    handleDeleteUser,
+    handleAllCode,
 }

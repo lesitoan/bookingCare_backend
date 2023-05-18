@@ -1,14 +1,13 @@
 import doctorService from "../../services/apiService/doctorService";
 
 //-----Get top doctor home------
-const getTopDoctorHome = async (req, res) => {
+const getTopDoctor = async (req, res) => {
     let limit = parseInt(req.query.limit);
     if (!limit) {
         limit = 10;
     }
     try {
-        console.log(limit)
-        const doctors = await doctorService.getTopDoctorHome(limit);
+        const doctors = await doctorService.getTopDoctor(limit);
         return res.status(200).json(doctors);
     } catch (e) {
         return res.status(200).json({
@@ -18,5 +17,5 @@ const getTopDoctorHome = async (req, res) => {
 }
 
 module.exports = {
-    getTopDoctorHome,
+    getTopDoctor,
 }
