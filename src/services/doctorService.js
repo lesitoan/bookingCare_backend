@@ -7,6 +7,7 @@ const getTopDoctor = (limit) => {
                 limit: limit,
                 // order: [['createAt', 'DESC']],
                 raw: true,
+                nest: true,
                 // include: [
                 //     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
                 //     { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
