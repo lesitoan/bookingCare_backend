@@ -8,10 +8,11 @@ const getTopDoctor = (limit) => {
                 // order: [['createAt', 'DESC']],
                 raw: true,
                 nest: true,
-                // include: [
-                //     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
-                //     { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
-                // ],
+                where: { roleId: 'R2' },
+                include: [
+                    { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] }
+                ],
                 attributes: { exclude: ['password'] }
             });
             resolve(doctors);
@@ -53,8 +54,32 @@ const createInfoDoctor = (data) => {
     });
 }
 
+const getDetailDoctor = (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // if (!doctorId) {
+            //     throw new Error('doctorId is not define');
+            // }
+            const infoDoctor = await db.User.findOne({
+                raw: true,
+                nest: true, // gom nhóm Markdown thành 1 key của user
+                attributes: { exclude: ['password'] },
+                where: { id: doctorId, roleId: 'R2' },
+                include: [
+                    { model: db.Markdown, attributes: ['description', 'contentMarkdown', 'contentHTML'] },
+                    { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+                ],
+            });
+            resolve(infoDoctor);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 module.exports = {
     getTopDoctor,
     getAllDoctors,
     createInfoDoctor,
+    getDetailDoctor,
 }

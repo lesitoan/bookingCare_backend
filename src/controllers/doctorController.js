@@ -44,8 +44,23 @@ const postInfoDoctor = async (req, res) => {
     }
 }
 
+//-----Get detail doctor------
+const getDetailDoctor = async (req, res) => {
+    try {
+        const doctorId = req.params.doctorId;
+        const infoDoctor = await doctorService.getDetailDoctor(doctorId);
+        return res.status(200).json(infoDoctor);
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            message: 'loi !!!!'
+        })
+    }
+}
+
 module.exports = {
     getTopDoctor,
     getAllDoctors,
     postInfoDoctor,
+    getDetailDoctor,
 }
