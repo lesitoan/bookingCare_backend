@@ -34,7 +34,7 @@ const getAllDoctors = async (req, res) => {
 const postInfoDoctor = async (req, res) => {
     try {
         const data = req.body;
-        const updatedInfo = await doctorService.createInfoDoctor(data);
+        const updatedInfo = await doctorService.saveInfoDoctor(data);
         return res.status(200).json(updatedInfo);
     } catch (e) {
         console.log(e)
