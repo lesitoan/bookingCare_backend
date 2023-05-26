@@ -91,6 +91,8 @@ const getDetailDoctor = (doctorId) => {
     });
 }
 
+
+
 module.exports = {
     getTopDoctor,
     getAllDoctors,

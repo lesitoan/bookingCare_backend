@@ -47,10 +47,10 @@ const checkUserLogin = (email, password) => {
     });
 };
 
-const salt = bcrypt.genSaltSync(10);
 const hashUserPassword = (password) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const salt = bcrypt.genSaltSync(10);
             const hashPassword = await bcrypt.hashSync(password, salt);
             resolve(hashPassword);
         } catch (err) {
@@ -127,27 +127,10 @@ const deleteUser = (id) => {
     });
 }
 
-const getAllCode = (typeInput) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let res = {};
-            if (!typeInput) {
-                resolve(res);
-            } else {
-                res = await db.Allcode.findAll({ where: { type: typeInput } });
-                resolve(res);
-            }
-        } catch (err) {
-            reject(err);
-        }
-    });
-}
-
 module.exports = {
     checkUserLogin,
     getUser,
     updateUser,
     createUser,
     deleteUser,
-    getAllCode,
 }

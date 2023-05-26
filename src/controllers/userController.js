@@ -44,19 +44,7 @@ const handleDeleteUser = async (req, res) => {
     return res.status(200).json({ message: isDeleteUser });
 }
 
-//-----Get AllCode------
-const handleAllCode = async (req, res) => {
-    try {
-        const type = req.params.type;
-        const data = await userService.getAllCode(type);
-        return res.status(200).json(data);
-    } catch (err) {
-        console.log(err);
-        return res.status(200).json({
-            message: err
-        })
-    }
-}
+
 
 
 module.exports = {
@@ -65,5 +53,4 @@ module.exports = {
     handleUpdateUser,
     handleCreateUser,
     handleDeleteUser,
-    handleAllCode,
 }
