@@ -42,17 +42,19 @@ const getScheduleByDate = (date, doctorId) => {
             if (!date || !doctorId) {
                 throw new Error('date or doctorId is not define !!!');
             }
-            console.log("---------------------")
-            console.log("date:", date)
-            console.log("---------------------")
             let data = await db.Schedule.findAll({
                 where: { date: date, doctorId: doctorId },
+                include: [
+                    { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] }
+                ],
+                raw: false,
+                nest: true,
             })
             if (!data) {
                 data = {};
             }
             console.log("---------------------")
-            console.log("date in database:", data.date)
+            console.log("date in database:", data)
             console.log("---------------------")
             resolve(data);
         } catch (err) {
