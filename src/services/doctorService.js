@@ -37,29 +37,60 @@ const getAllDoctors = () => {
     });
 }
 
-const saveInfoDoctor = (data) => {
+const saveInfoDoctorMarkdown = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const { doctorId, ...doctorInfo } = data;
+            const { doctorId, ...doctorInfor } = data;
             if (!doctorId) {
                 throw new Error('ID is null !!!');
-            } else if (Object.keys(doctorInfo).length === 0) {
+            } else if (Object.keys(doctorInfor).length === 0) {
                 throw new Error('Doctor infomation is null !!!');
             }
-            const isInfoDoctor = await db.Markdown.findOne({
+            const isInforDoctor = await db.Markdown.findOne({
                 where: { doctorId: doctorId },
                 raw: true,
                 attributes: { exclude: ['password'] }
             });
             let newInfo;
-            if (isInfoDoctor) {
-                newInfo = await db.Markdown.update(doctorInfo, {
+            if (isInforDoctor) {
+                newInfo = await db.Markdown.update(doctorInfor, {
                     where: {
                         doctorId: doctorId,
                     }
                 });
             } else {
                 newInfo = await db.Markdown.create(data)
+            }
+            resolve(newInfo);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
+const saveInfoDoctor = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const { doctorId, ...doctorInfor } = data;
+            if (!doctorId) {
+                throw new Error('ID is null !!!');
+            } else if (Object.keys(doctorInfor).length === 0) {
+                throw new Error('Doctor infomation is null !!!');
+            }
+            const isInforDoctor = await db.DoctorInfor.findOne({
+                where: { doctorId: doctorId },
+                raw: true,
+                attributes: { exclude: ['password'] }
+            });
+            let newInfo;
+            if (isInforDoctor) {
+                newInfo = await db.DoctorInfor.update(doctorInfor, {
+                    where: {
+                        doctorId: doctorId,
+                    }
+                });
+            } else {
+                newInfo = await db.DoctorInfor.create(data)
             }
             resolve(newInfo);
         } catch (err) {
@@ -82,6 +113,16 @@ const getDetailDoctor = (doctorId) => {
                 include: [
                     { model: db.Markdown, attributes: ['description', 'contentMarkdown', 'contentHTML'] },
                     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+
+                    {
+                        model: db.DoctorInfor,
+                        attributes: { exclude: ['updatedAt', 'createdAt', 'id'] },
+                        include: [
+                            { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+                            { model: db.Allcode, as: 'provinceIdTypeData', attributes: ['valueEn', 'valueVi'] },
+                            { model: db.Allcode, as: 'paymentIdTypeData', attributes: ['valueEn', 'valueVi'] },
+                        ]
+                    },
                 ],
             });
             resolve(infoDoctor);
@@ -96,6 +137,7 @@ const getDetailDoctor = (doctorId) => {
 module.exports = {
     getTopDoctor,
     getAllDoctors,
-    saveInfoDoctor,
+    saveInfoDoctorMarkdown,
     getDetailDoctor,
+    saveInfoDoctor,
 }

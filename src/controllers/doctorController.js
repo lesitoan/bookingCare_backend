@@ -30,7 +30,21 @@ const getAllDoctors = async (req, res) => {
     }
 }
 
-//-----Post info doctor------
+//-----Post info doctor table markdown------
+const postInfoDoctorMarkdown = async (req, res) => {
+    try {
+        const data = req.body;
+        const updatedInfo = await doctorService.saveInfoDoctorMarkdown(data);
+        return res.status(200).json(updatedInfo);
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            message: 'loi !!!!'
+        })
+    }
+}
+
+//-----Post info doctor table doctorinfor------
 const postInfoDoctor = async (req, res) => {
     try {
         const data = req.body;
@@ -63,6 +77,7 @@ const getDetailDoctor = async (req, res) => {
 module.exports = {
     getTopDoctor,
     getAllDoctors,
-    postInfoDoctor,
+    postInfoDoctorMarkdown,
     getDetailDoctor,
+    postInfoDoctor,
 }
