@@ -68,7 +68,7 @@ const saveInfoDoctorMarkdown = (data) => {
     });
 }
 
-const saveInfoDoctor = (data) => {
+const saveInfoDoctorExtra = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             const { doctorId, ...doctorInfor } = data;
@@ -113,19 +113,33 @@ const getDetailDoctor = (doctorId) => {
                 include: [
                     { model: db.Markdown, attributes: ['description', 'contentMarkdown', 'contentHTML'] },
                     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
-
-                    {
-                        model: db.DoctorInfor,
-                        attributes: { exclude: ['updatedAt', 'createdAt', 'id'] },
-                        include: [
-                            { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
-                            { model: db.Allcode, as: 'provinceIdTypeData', attributes: ['valueEn', 'valueVi'] },
-                            { model: db.Allcode, as: 'paymentIdTypeData', attributes: ['valueEn', 'valueVi'] },
-                        ]
-                    },
                 ],
             });
             resolve(infoDoctor);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
+const getDoctorInforExtra = (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // if (!doctorId) {
+            //     throw new Error('doctorId is not define');
+            // }
+            const infoDoctorExtra = await db.DoctorInfor.findOne({
+                raw: true,
+                nest: true,
+                attributes: { exclude: ['password'] },
+                where: { doctorId: doctorId },
+                include: [
+                    { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'provinceIdTypeData', attributes: ['valueEn', 'valueVi'] },
+                    { model: db.Allcode, as: 'paymentIdTypeData', attributes: ['valueEn', 'valueVi'] },
+                ],
+            });
+            resolve(infoDoctorExtra);
         } catch (err) {
             reject(err);
         }
@@ -139,5 +153,6 @@ module.exports = {
     getAllDoctors,
     saveInfoDoctorMarkdown,
     getDetailDoctor,
-    saveInfoDoctor,
+    saveInfoDoctorExtra,
+    getDoctorInforExtra,
 }
