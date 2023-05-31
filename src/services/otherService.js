@@ -63,8 +63,24 @@ const getScheduleByDate = (date, doctorId) => {
     });
 }
 
+const createSpecialty = (specialty) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const { name, image, description } = specialty;
+            if (!image || !name || !description) {
+                throw new Error('missing data !!!');
+            }
+            const newSpecialty = await db.Specialty.create(specialty);
+            resolve(newSpecialty);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 module.exports = {
     bulkCreateSchedule,
     getAllCode,
     getScheduleByDate,
+    createSpecialty,
 }

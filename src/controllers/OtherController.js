@@ -41,8 +41,22 @@ const getScheduleByDate = async (req, res) => {
     }
 }
 
+const createSpecialty = async (req, res) => {
+    try {
+        const newSpecialty = await otherService.createSpecialty(req.body);
+        console.log('new specialty:', newSpecialty)
+        return res.status(200).json(newSpecialty);
+    } catch (err) {
+        console.log(err);
+        return res.status(200).json({
+            message: err
+        })
+    }
+}
+
 module.exports = {
     bulkCreateSchedule,
     handleAllCode,
     getScheduleByDate,
+    createSpecialty,
 }
