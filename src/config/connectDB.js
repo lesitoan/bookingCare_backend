@@ -1,7 +1,13 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('newdb', 'root', null, {
-    host: 'localhost',
+// const sequelize = new Sequelize('newdb', 'root', null, {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//     logging: false
+// });
+
+const sequelize = new Sequelize('bg207posdezeu5hgs15d', 'uqkrpuwhfmj5xep6', 'Df31UrO1QmIZVlTqtbFY', {
+    host: 'bg207posdezeu5hgs15d-mysql.services.clever-cloud.com',
     dialect: 'mysql',
     logging: false
 });

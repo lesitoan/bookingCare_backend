@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "newdb",
-    "host": "127.0.0.1",
+    "username": "uqkrpuwhfmj5xep6",
+    "password": "Df31UrO1QmIZVlTqtbFY",
+    "database": "bg207posdezeu5hgs15d",
+    "host": "bg207posdezeu5hgs15d-mysql.services.clever-cloud.com",
     "dialect": "mysql",
     "logging": false
   },
